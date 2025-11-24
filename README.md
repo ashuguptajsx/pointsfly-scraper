@@ -5,13 +5,8 @@ A real-time flight fare comparison tool that scrapes live flight data from Googl
 ![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
 ![Playwright](https://img.shields.io/badge/Playwright-1.56-green?logo=playwright)
-![License](https://img.shields.io/badge/license-MIT-blue)
 
-## 🚀 Live Demo
 
-🔗 **[View Live Application](https://your-deployment-url.vercel.app)** *(Replace with your actual Vercel URL)*
-
----
 
 ## 📋 Table of Contents
 
