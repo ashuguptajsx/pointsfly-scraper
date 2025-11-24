@@ -1,0 +1,11 @@
+{
+    "functions": {
+        "app/api/search/route.ts": {
+            "maxDuration": 60,
+            "memory": 1024
+        }
+    },
+    "regions": [
+        "bom1"
+    ]
+}
