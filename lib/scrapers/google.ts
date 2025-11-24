@@ -1,7 +1,6 @@
 import { BaseScraper } from "./base";
 import { ScraperResult, SearchQuery, Flight } from "../types";
 import { chromium } from "playwright-core";
-import chromiumPkg from "@sparticuz/chromium";
 
 // Currency symbols and patterns for worldwide support
 const CURRENCY_PATTERNS = {
@@ -183,14 +182,22 @@ export class GoogleFlightsScraper extends BaseScraper {
     // Detect if we're running in a serverless environment (Vercel)
     const isServerless = process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME;
     
-    const browser = await chromium.launch({ 
-      headless: true,
-      // Use serverless chromium in production, regular chromium locally
-      executablePath: isServerless ? await chromiumPkg.executablePath() : undefined,
-      args: isServerless 
-        ? [...chromiumPkg.args, '--disable-blink-features=AutomationControlled']
-        : ['--disable-blink-features=AutomationControlled']
-    });
+    let browser;
+    if (isServerless) {
+      // Dynamic import for serverless chromium
+      const chromiumPkg = await import('@sparticuz/chromium');
+      browser = await chromium.launch({ 
+        headless: true,
+        executablePath: await chromiumPkg.default.executablePath(),
+        args: [...chromiumPkg.default.args, '--disable-blink-features=AutomationControlled']
+      });
+    } else {
+      // Local development
+      browser = await chromium.launch({ 
+        headless: true,
+        args: ['--disable-blink-features=AutomationControlled']
+      });
+    }
     
     const context = await browser.newContext({
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',

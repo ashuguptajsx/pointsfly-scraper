@@ -70,7 +70,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-2 text-xs font-medium text-neutral-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/5">
               <Sparkles className="w-3 h-3 text-neutral-400" />
-              <span>AI-Powered Scraper</span>
+              <span>flights scraper</span>
             </div>
           </div>
         </div>
